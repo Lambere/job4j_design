@@ -19,6 +19,7 @@ class BoxTest {
         String name = box.whatsThis();
         assertThat(name).isEqualTo("Cube");
     }
+
     @Test
     void isThisBodyHas0Vertices() {
         Box box = new Box(0, 10);
@@ -28,7 +29,7 @@ class BoxTest {
 
     @Test
     void isThisBodyHas4Vertices() {
-        Box box = new Box(4,10);
+        Box box = new Box(4, 10);
         int numbOfVertices = box.getNumberOfVertices();
         assertThat(numbOfVertices).isEqualTo(4);
     }
