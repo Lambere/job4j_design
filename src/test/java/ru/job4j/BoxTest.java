@@ -2,7 +2,6 @@ package ru.job4j;
 
 import org.junit.jupiter.api.Test;
 import ru.job4j.assertj.Box;
-
 import static org.assertj.core.api.Assertions.assertThat;
 
 class BoxTest {
