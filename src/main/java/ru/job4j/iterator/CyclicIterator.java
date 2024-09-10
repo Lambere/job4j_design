@@ -15,10 +15,11 @@ public class CyclicIterator<T> implements Iterator<T> {
 
     @Override
     public boolean hasNext() {
-        if (data.isEmpty()) {
-            return  false;
+        boolean result = index - 1 < data.size();
+        if (!data.isEmpty()) {
+            result = false;
         }
-        return index - 1 < data.size();
+        return result;
     }
 
     @Override
