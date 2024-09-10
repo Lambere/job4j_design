@@ -1,4 +1,4 @@
-package ru.job4j.assertj;
+package ru.job4;
 
 import java.util.*;
 import java.util.stream.Collectors;
