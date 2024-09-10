@@ -31,7 +31,6 @@ public class CyclicIterator<T> implements Iterator<T> {
         if (!hasNext()) {
             index = 1;
         }
-
         return data.get(index - 1);
     }
 }
