@@ -13,14 +13,17 @@ public class SimpleArrayList<T> implements SimpleList<T> {
         container = (T[]) new Object[capacity];
     }
 
+    private void increaseOfArray() {
+        if (count == container.length - 1 || container.length == 0) {
+            container = Arrays.copyOf(container, (container.length + 1) * 2);
+        }
+    }
+
     @Override
     public void add(T value) {
         size++;
         modCount++;
-        if (count == container.length - 1 || container.length == 0) {
-            container = Arrays.copyOf(container, (container.length + 1) * 2);
-        }
-
+        increaseOfArray();
         container[count++] = value;
     }
 
@@ -33,9 +36,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T remove(int index) {
-        if (index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, container.length - (container.length - size));
         size--;
         modCount--;
         T[] containerCopy = (T[]) new Object[container.length - 1];
@@ -49,7 +50,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T get(int index) {
-        Objects.checkIndex(index, container.length - 1);
+        Objects.checkIndex(index, container.length - (container.length - size));
         if (index >= size) {
             throw new IndexOutOfBoundsException();
         }
