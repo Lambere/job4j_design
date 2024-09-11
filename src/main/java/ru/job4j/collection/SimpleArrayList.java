@@ -26,10 +26,7 @@ public class SimpleArrayList<T> implements SimpleList<T> {
 
     @Override
     public T set(int index, T newValue) {
-        Objects.checkIndex(index, container.length - 1);
-        if (index >= size) {
-            throw new IndexOutOfBoundsException();
-        }
+        Objects.checkIndex(index, container.length - (container.length - size));
         container[index] = newValue;
         return newValue;
     }
