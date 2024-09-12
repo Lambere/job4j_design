@@ -7,10 +7,10 @@ import java.util.List;
 public class Generics {
     public static void main(String[] args) {
         Generics generics = new Generics();
-        List<Predator> first = new ArrayList<>();
+        List<Animal> first = new ArrayList<>();
         List<Predator> second = new ArrayList<>();
         List<Tiger> third = new ArrayList<>();
-        first.add(new Predator());
+        first.add(new Animal());
         second.add(new Predator());
         third.add(new Tiger());
 
@@ -19,7 +19,6 @@ public class Generics {
         generics.printObject(third);
         System.out.println();
 
-        generics.printBoundedWildCard(first);
         generics.printBoundedWildCard(second);
         generics.printBoundedWildCard(third);
         System.out.println();
@@ -36,7 +35,7 @@ public class Generics {
     }
 
     public void printBoundedWildCard(List<? extends Predator> list) {
-        for (Iterator<? extends Animal> iterator = list.iterator(); iterator.hasNext();) {
+        for (Iterator<? extends Predator> iterator = list.iterator(); iterator.hasNext();) {
             Object next = iterator.next();
             System.out.println("Текущий элемент: " + next);
         }
