@@ -1,7 +1,5 @@
 package ru.job4j.generic;
 
-import java.util.Objects;
-
 public class UserStore implements Store<User> {
 
     private final Store<User> store = new MemStore<>();
