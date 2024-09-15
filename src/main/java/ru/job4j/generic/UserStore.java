@@ -9,9 +9,8 @@ public class UserStore implements Store<User> {
         store.add(model);
     }
 
-    @Override
+     @Override
     public boolean replace(String id, User model) {
-
         return store.replace(id, model);
     }
 
