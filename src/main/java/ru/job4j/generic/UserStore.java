@@ -6,11 +6,10 @@ public class UserStore implements Store<User> {
 
     @Override
     public void add(User model) {
-
         store.add(model);
     }
 
-     @Override
+    @Override
     public boolean replace(String id, User model) {
         return store.replace(id, model);
     }
@@ -23,6 +22,5 @@ public class UserStore implements Store<User> {
     @Override
     public User findById(String id) {
         return store.findById(id);
-
     }
 }

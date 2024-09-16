@@ -11,13 +11,15 @@ public final class MemStore<T extends Base> implements Store<T> {
     @Override
     public void add(T model) {
             storage.putIfAbsent(model.getId(), model);
-
     }
 
     @Override
     public boolean replace(String id, T model) {
-
-            return storage.remove(id, model);
+       if (storage.containsKey(id)) {
+           storage.remove(id);
+           storage.put(id, model);
+       }
+        return storage.containsValue(model) && storage.containsKey(id);
     }
 
     @Override
