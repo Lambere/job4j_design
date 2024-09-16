@@ -35,7 +35,6 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
 
     public Iterator<E> iterator() {
         return new Iterator<E>() {
-            private Node<E> lastReturned = null;
             private int currentIndex = 0;
             private final int expectedModCount = modCount;
 
@@ -53,7 +52,7 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
                     throw new ConcurrentModificationException();
                 }
                 currentIndex++;
-                lastReturned = first;
+                Node<E> lastReturned = first;
                 first = first.next;
                 return lastReturned.item;
             }
