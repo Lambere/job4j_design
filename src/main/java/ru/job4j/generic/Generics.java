@@ -18,7 +18,6 @@ import java.util.List;
             generics.printObject(second);
             generics.printObject(third);
             System.out.println();
-
             /*generics.printBoundedWildCard(first);
             */
             generics.printBoundedWildCard(second);
