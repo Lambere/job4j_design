@@ -1,24 +1,24 @@
 package ru.job4j.collection;
 
 import java.util.*;
+import java.util.Iterator;
 
 public class SimpleLinkedList<E> implements SimpleLinked<E> {
 
-    int modCount = 0;
-    int size = 0;
-    Node<E> first;
-    Node<E> last;
+    private int modCount = 0;
+    private int size;
+    private Node<E> first;
+    private Node<E> last;
 
     @Override
     public void add(E value) {
-        final Node<E> l = last;
-        final Node<E> newNode = new Node<>(value, l);
-        last = newNode;
-        if (l == null) {
+        Node<E> newNode = new Node<>(value, null);
+        if (last == null) {
             first = newNode;
         } else {
-            l.next = newNode;
+            last.next = newNode;
         }
+        last = newNode;
         size++;
         modCount++;
     }
