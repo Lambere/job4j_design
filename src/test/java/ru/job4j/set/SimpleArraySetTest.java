@@ -37,4 +37,27 @@ class SimpleArraySetTest {
         assertThat(set.contains(null)).isTrue();
         assertThat(set.add(null)).isFalse();
     }
+
+    @Test
+    void whenAddNonNullElements() {
+        SimpleSet<String> set = new SimpleArraySet<>();
+        assertThat(set.add("Mango")).isTrue();
+        assertThat(set.contains("Mango")).isTrue();
+        assertThat(set.add("Mango")).isFalse();
+        assertThat(set.add("Apple")).isTrue();
+        assertThat(set.contains("Apple")).isTrue();
+        assertThat(set.add("Apple")).isFalse();
+    }
+
+    @Test
+    void whenAddNullAndNonNullElements() {
+        SimpleSet<String> set = new SimpleArraySet<>();
+        assertThat(set.add("Car")).isTrue();
+        assertThat(set.contains("Car")).isTrue();
+        assertThat(set.add("Car")).isFalse();
+        assertThat(set.add(null)).isTrue();
+        assertThat(set.contains(null)).isTrue();
+        assertThat(set.add(null)).isFalse();
+    }
+
 }
