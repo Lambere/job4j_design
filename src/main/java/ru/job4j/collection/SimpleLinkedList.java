@@ -5,7 +5,6 @@ import java.util.Iterator;
 
 public class SimpleLinkedList<E> implements SimpleLinked<E> {
 
-    private int modCount = 0;
     private int size;
     private Node<E> first;
 
@@ -22,7 +21,6 @@ public class SimpleLinkedList<E> implements SimpleLinked<E> {
             current.next = newNode;
         }
         size++;
-        modCount++;
     }
 
     public E get(int index) {
