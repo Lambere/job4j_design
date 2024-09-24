@@ -17,7 +17,6 @@ public class SimpleArraySet<T> implements SimpleSet<T> {
             }
         }
         set.add(value);
-
         return true;
     }
 
