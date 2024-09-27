@@ -18,6 +18,7 @@ class SimpleStackTest {
 
     @Test
     void whenPushThenPoll() {
+
         stack.push(3);
         stack.push(4);
         assertThat(stack.pop()).isEqualTo(4);

@@ -46,7 +46,6 @@ public class ForwardLinked<T> implements Iterable<T> {
         T a = head.item;
         head.item = null;
         head = head.next;
-
         modCount--;
 
         return a;
@@ -62,8 +61,8 @@ public class ForwardLinked<T> implements Iterable<T> {
     }
 
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
-            private int expectedModCount = modCount;
+        return new Iterator<>() {
+            private final int expectedModCount = modCount;
             private Node<T> current = head;
 
             @Override
