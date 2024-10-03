@@ -12,7 +12,9 @@ public class SimpleQueue<T> {
         while (--sizeCopy >= 0) {
             input.push(output.pop());
         }
-
+        if (input == null) {
+            throw new NoSuchElementException("Queue is empty");
+        }
         size--;
         return input.pop();
     }
