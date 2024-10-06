@@ -1,7 +1,5 @@
 package ru.job4j.collection;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.NoSuchElementException;
 
@@ -24,28 +22,22 @@ public class RevertLinked<T> implements Iterable<T> {
     }
 
     public boolean revert() {
-        if (size <= 1) {
-            return false;
-        }
-
+        boolean res = size > 1;
         Node<T> previous = null;
         Node<T> current = head;
-
         while (current != null) {
             Node<T> next = current.next;
             current.next = previous;
             previous = current;
             current = next;
         }
-
         head = previous;
-
-        return true;
+        return res;
     }
 
     @Override
     public Iterator<T> iterator() {
-        return new Iterator<T>() {
+        return new Iterator<>() {
             Node<T> node = head;
 
             @Override
