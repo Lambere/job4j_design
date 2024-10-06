@@ -53,8 +53,8 @@ public class ListUtils {
         ListIterator<T> iterator = list.listIterator();
         Stream<List<T>> stream = Stream.of(elements);
         while (iterator.hasNext()) {
-            for(T i : elements) {
-                if(iterator.next().equals(i)) {
+            for (T i : elements) {
+                if (iterator.next().equals(i)) {
                     iterator.remove();
                 }
 
