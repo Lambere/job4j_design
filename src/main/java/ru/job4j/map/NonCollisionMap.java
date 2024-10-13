@@ -12,23 +12,22 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean put(K key, V value) {
-        if (table[indexFor(hash(key.hashCode()))] == null) {
-            table[indexFor(key.hashCode())] = new MapEntry<>(key, value);
+        if (table[indexFor(hash(key.hashCode())) - 1] == null) {
+            table[indexFor(hash(key.hashCode())) - 1] = new MapEntry<>(key, value);
         }
-
         count++;
         modCount++;
         capacity++;
-        return table[indexFor(key.hashCode())] != null;
+        return table[indexFor(hash(key.hashCode())) - 1] != null;
     }
 
     @Override
     public V get(K key) {
         K key1 = null;
-        if (table[indexFor(hash(key.hashCode()))] == null) {
-            key1 = table[indexFor(key.hashCode())].key;
+        if (table[indexFor(hash(key.hashCode())) - 1] == null) {
+            key1 = table[indexFor(hash(key.hashCode())) - 1].key;
         }
-        return key == key1 ? null : table[indexFor(key.hashCode())].value;
+        return key == key1 ? null : table[indexFor(hash(key.hashCode())) - 1].value;
     }
 
     @Override
