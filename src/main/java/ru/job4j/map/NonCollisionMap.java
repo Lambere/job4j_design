@@ -1,5 +1,7 @@
 package ru.job4j.map;
 
+import ru.job4j.collection.SimpleLinkedList;
+
 import java.util.*;
 
 public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
@@ -10,30 +12,36 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     private int modCount = 0;
     private MapEntry<K, V>[] table = new MapEntry[capacity];
 
+    public static void main(String[] args) {
+        NonCollisionMap a = new NonCollisionMap();
+        System.out.println(a.indexFor(6));
+    }
+
     @Override
     public boolean put(K key, V value) {
-        if (table[indexFor(hash(key.hashCode())) - 1] == null) {
-            table[indexFor(hash(key.hashCode())) - 1] = new MapEntry<>(key, value);
+        boolean res = false;
+        if (table[indexFor(hash(key.hashCode()))] == null) {
+            table[indexFor(hash(key.hashCode()))] = new MapEntry<>(key, value);
+            count++;
+            modCount++;
+            res = true;
         }
-        count++;
-        modCount++;
-        capacity++;
-        return table[indexFor(hash(key.hashCode())) - 1] != null;
+
+        return res;
     }
 
     @Override
     public V get(K key) {
-        K key1 = null;
-        if (table[indexFor(hash(key.hashCode())) - 1] == null) {
-            key1 = table[indexFor(hash(key.hashCode())) - 1].key;
+        V res = null;
+        if (table[indexFor(hash(key.hashCode()))].value == null) {
+            res = table[indexFor(hash(key.hashCode()))].value;
         }
-        return key == key1 ? null : table[indexFor(hash(key.hashCode())) - 1].value;
+        return res;
     }
 
     @Override
     public boolean remove(K key) {
-        count--;
-        modCount--;
+
         return false;
     }
 
@@ -43,10 +51,10 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
             @Override
             public boolean hasNext() {
-                while (count < capacity) {
+                while (count < capacity && table[count] == null) {
                     count++;
                 }
-                return count < table.length;
+                return count < capacity;
             }
 
             @Override
@@ -54,17 +62,17 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
                 if (!hasNext()) {
                     throw new NoSuchElementException();
                 }
-                return this.next();
+                return table[count].key;
             }
         };
-        }
+    }
 
     private int hash(int hashCode) {
-        return (hashCode == 0) ? 0 : hashCode ^ (hashCode >>> 16);
+        return hashCode ^ (hashCode >>> 16);
     }
 
     private int indexFor(int hash) {
-        return hash & (table.length - 1);
+        return hash & capacity - 1;
     }
 
     private void expand() {
