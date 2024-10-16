@@ -1,7 +1,5 @@
 package ru.job4j.map;
 
-import ru.job4j.collection.SimpleLinkedList;
-
 import java.util.*;
 
 public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
@@ -14,24 +12,25 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean put(K key, V value) {
+        boolean res = false;
         if (count >= capacity * LOAD_FACTOR) {
             expand();
         }
-        int index = indexFor(hash(Objects.hashCode(key)));
-        if (table[index] != null) {
-            return false;
+        if (findIndex(key) == null) {
+            res = true;
+            table[indexFor(hash(Objects.hashCode(key)))] = new MapEntry<>(key, value);
+            count++;
+            modCount++;
         }
-        table[index] = new MapEntry<>(key, value);
-        count++;
-        modCount++;
-        return true;
+
+        return res;
     }
 
     @Override
     public V get(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
-        MapEntry<K, V> entry = table[index];
-        if (entry != null && Objects.equals(entry.key, key)) {
+        MapEntry<K, V> entry = findIndex(key);
+        if (findIndex(key) != null && (hash(Objects.hashCode(key))) == (hash(Objects.hashCode(findIndex(key).key)))
+                && Objects.equals(findIndex(key).key, key)) {
             return entry.value;
         }
         return null;
@@ -39,14 +38,15 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public boolean remove(K key) {
-        int index = indexFor(hash(Objects.hashCode(key)));
-        if (table[index] != null && Objects.equals(table[index].key, key)) {
-            table[index] = null;
+        boolean res = false;
+        if (findIndex(key) != null && (hash(Objects.hashCode(key))) == (hash(Objects.hashCode(findIndex(key).key)))
+                && Objects.equals(findIndex(key).key, key)) {
+            table[indexFor(hash(Objects.hashCode(key)))] = null;
             count--;
             modCount++;
-            return true;
+            res = true;
         }
-        return false;
+        return res;
     }
 
     @Override
@@ -74,6 +74,9 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
                 return table[index++].key;
             }
         };
+    }
+    private MapEntry<K, V> findIndex(K key) {
+        return table[indexFor(hash(Objects.hashCode(key)))];
     }
 
     private int hash(int hashCode) {
