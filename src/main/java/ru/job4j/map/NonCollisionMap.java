@@ -75,6 +75,7 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
             }
         };
     }
+
     private MapEntry<K, V> findIndex(K key) {
         return table[indexFor(hash(Objects.hashCode(key)))];
     }
