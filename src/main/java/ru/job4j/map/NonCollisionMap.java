@@ -29,18 +29,21 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
     @Override
     public V get(K key) {
         MapEntry<K, V> entry = findIndex(key);
-        if (findIndex(key) != null && Objects.hashCode(key) == Objects.hashCode(findIndex(key).key)
-                && Objects.equals(findIndex(key).key, key)) {
+        if (checkKey(key)) {
             return entry.value;
         }
         return null;
     }
 
+    private boolean checkKey(K key) {
+        return findIndex(key) != null && Objects.hashCode(key) == Objects.hashCode(findIndex(key).key)
+                && Objects.equals(findIndex(key).key, key);
+    }
+
     @Override
     public boolean remove(K key) {
         boolean res = false;
-        if (findIndex(key) != null && Objects.hashCode(key) == Objects.hashCode(findIndex(key).key)
-                && Objects.equals(findIndex(key).key, key)) {
+        if (checkKey(key)) {
             table[indexFor(hash(Objects.hashCode(key)))] = null;
             count--;
             modCount++;
