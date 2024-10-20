@@ -28,11 +28,12 @@ public class NonCollisionMap<K, V> implements SimpleMap<K, V> {
 
     @Override
     public V get(K key) {
+        V res = null;
         MapEntry<K, V> entry = findIndex(key);
         if (checkKey(key)) {
-            return entry.value;
+            res = entry.value;
         }
-        return null;
+        return res;
     }
 
     private boolean checkKey(K key) {
