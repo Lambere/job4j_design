@@ -5,9 +5,7 @@ import java.util.*;
 public class Analize {
 
     public static Info diff(Set<User> previous, Set<User> current) {
-        int added = 0;
-        int changed = 0;
-        int deleted;
+        int added = 0, changed = 0, deleted;
         Map<Integer, String> prevMap = new HashMap<>();
         for (User user : previous) {
             prevMap.put(user.getId(), user.getName());
