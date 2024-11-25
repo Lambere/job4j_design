@@ -10,6 +10,7 @@ public class Analysis {
              PrintWriter writer = new PrintWriter(new FileOutputStream(target))) {
             SimpleDateFormat sdf = new SimpleDateFormat("hh:mm:ss");
             String finish = "99:99:99";
+            StringBuilder res = new StringBuilder();
             while (reader.ready()) {
                 String[] a = reader.readLine().split(" ");
                 if (Integer.parseInt((a[0])) > 300) {
@@ -17,10 +18,12 @@ public class Analysis {
                         finish = a[1];
                     }
                 } else if (!finish.equals("99:99:99")) {
-                    writer.println(finish + ";" + a[1]);
+                    res.append(finish).append(";");
+                    res.append(a[1]).append(";").append(System.lineSeparator());
                     finish = "99:99:99";
                 }
             }
+            writer.println(res);
         } catch (Exception a) {
             a.printStackTrace();
         }
