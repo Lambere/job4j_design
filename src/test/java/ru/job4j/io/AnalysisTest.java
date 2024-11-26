@@ -50,5 +50,4 @@ class AnalysisTest {
         }
         assertThat("10:57:01;11:02:02;").hasToString(result.toString());
     }
-
 }
