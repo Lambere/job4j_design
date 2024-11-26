@@ -7,7 +7,7 @@ class ConfigTest {
 
     @Test
     void whenPairWithoutComment() {
-        String path = ".\\data\\pair_without_comment.properties";
+        String path = "./data/pair_without_comment.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name")).isEqualTo("Petr Arsentev");
@@ -15,7 +15,7 @@ class ConfigTest {
 
     @Test
     void whenPairWithWrongFormat() {
-        String path = ".\\data\\pair_wrong_format.properties";
+        String path = "./data/pair_wrong_format.properties";
         Config config = new Config(path);
         config.load();
         assertThatException();
@@ -23,7 +23,7 @@ class ConfigTest {
 
     @Test
     void whenPairWithWrongFormat2() {
-        String path = ".\\data\\pair_wrong_format_2.properties";
+        String path = "./data/pair_wrong_format_2.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name")).isEqualTo("Petr=");
@@ -31,7 +31,7 @@ class ConfigTest {
 
     @Test
     void whenPairWithWrongFormat3() {
-        String path = ".\\data\\pair_wrong_format_3.properties";
+        String path = "./data/pair_wrong_format_3.properties";
         Config config = new Config(path);
         config.load();
         assertThat(config.value("name")).isEqualTo("Petr=1");
