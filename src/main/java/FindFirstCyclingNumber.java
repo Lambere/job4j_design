@@ -1,14 +1,15 @@
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class FindFirstCyclingNumber {
     public static int findNumber(int[] numbers) {
-        HashMap<Integer, Integer> map = new HashMap<>();
+        ArrayList<Integer> list = new ArrayList<>();
 
         for (int i = 0; i < numbers.length; i++) {
-            if (map.containsKey(numbers[i])) {
+            if (list.contains(numbers[i])) {
                 return i;
             }
-            map.put(numbers[i], i);
+            list.add(numbers[i]);
         }
         return -1; 
     }
