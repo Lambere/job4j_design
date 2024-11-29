@@ -1,5 +1,6 @@
+package ru.job4j;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class FindFirstCyclingNumber {
     public static int findNumber(int[] numbers) {
