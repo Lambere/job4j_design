@@ -5,17 +5,23 @@ import java.nio.file.FileVisitResult;
 import java.nio.file.Path;
 import java.nio.file.SimpleFileVisitor;
 import java.nio.file.attribute.BasicFileAttributes;
-import java.util.function.Predicate;
+import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.Objects;
 
 public class DuplicatesVisitor extends SimpleFileVisitor<Path> {
+    HashSet<FileProperty> elements = new HashSet<>();
+
     @Override
     public FileVisitResult visitFile(Path file,
                                      BasicFileAttributes attributes) throws IOException {
-        FileProperty fileProperty = new FileProperty(attributes.size(), file.getFileName().toString())
-        Predicate predicate = path -> path;
-        if (predicate.test(fileProperty)) {
-            System.out.println(file.toAbsolutePath());
+
+        String[] a = file.getFileName().toString().split("/");
+        FileProperty fileProperty = new FileProperty(attributes.size(), a[a.length - 1]);
+        if (elements.contains(fileProperty)) {
+            System.out.println(fileProperty.getName());
         }
+        elements.add(fileProperty);
 
         return super.visitFile(file, attributes);
     }
