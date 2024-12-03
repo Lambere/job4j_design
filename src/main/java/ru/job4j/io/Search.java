@@ -11,7 +11,6 @@ public class Search {
         if (args.length == 0) {
             throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
         }
-
         search(Path.of(args[0]), path -> path.toFile().getName().endsWith("." + args[1])).forEach(System.out::println);
     }
 
