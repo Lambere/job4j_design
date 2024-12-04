@@ -23,9 +23,7 @@ public class Config {
             if (a.endsWith("=")) {
                 values[1] += "=";
             }
-            if (values[1].isEmpty() || values[0].isEmpty()) {
-                throw new IllegalArgumentException();
-            }
+            validate(values[0], values[1]);
             if (values.length > 2) {
                 for (int i = 2; i < values.length; i++) {
                     values[1] += "=" + values[i];
@@ -35,6 +33,12 @@ public class Config {
 
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    void validate(String a, String b) {
+        if (a.isEmpty() || b.isEmpty()) {
+            throw new IllegalArgumentException();
         }
     }
 
@@ -54,7 +58,7 @@ public class Config {
     }
 
     public static void main(String[] args) {
-        System.out.println(new Config("data/app.properties"));
+        System.out.println(new Config("src/data/app.properties"));
     }
 
 }
