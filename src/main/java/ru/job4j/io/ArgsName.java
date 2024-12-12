@@ -38,11 +38,11 @@ public class ArgsName {
         if (arg.startsWith("-=")) {
             res = ("Error: This argument '" + arg + "' does not contain a key");
         } else if (!arg.startsWith("-")) {
-                res = "Error: This argument '"+ arg + "' does not start with a '-' character";
+                res = "Error: This argument '" + arg + "' does not start with a '-' character";
             } else  if (!arg.contains("=")) {
-                    res = "Error: This argument '"+ arg + "' does not contain an equal sign";
+                    res = "Error: This argument '" + arg + "' does not contain an equal sign";
                 } else if (arg.split("=").length < 2) {
-                    res = "Error: This argument '"+ arg + "' does not contain a value";
+                    res = "Error: This argument '" + arg + "' does not contain a value";
                 }
         if (res != null) {
             throw new IllegalArgumentException(res);
