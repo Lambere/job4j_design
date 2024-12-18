@@ -8,9 +8,7 @@ import java.util.function.Predicate;
 
 public class Search {
     public static void main(String[] args) throws IOException {
-        if (args.length == 0) {
-            throw new IllegalArgumentException("Root folder is null. Usage  ROOT_FOLDER.");
-        }
+        validate(args);
         search(Path.of(args[0]), path -> path.toFile().getName().endsWith("." + args[1])).forEach(System.out::println);
     }
 
@@ -19,5 +17,18 @@ public class Search {
         SearchFiles searcher = new SearchFiles(condition);
         Files.walkFileTree(root, searcher);
         return searcher.getPaths();
+    }
+
+    public static void validate(String[] args) {
+        if (args.length == 0) {
+            throw new IllegalArgumentException();
+        }
+        Path file = Path.of(args[0]);
+        if (!file.toFile().isDirectory()) {
+            throw new IllegalArgumentException(String.format("Not directory %s", file.toAbsolutePath()));
+        }
+        if (!file.toFile().exists()) {
+            throw new IllegalArgumentException(String.format("Not exist %s", file.toAbsolutePath()));
+        }
     }
 }
