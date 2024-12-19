@@ -22,12 +22,12 @@ public class ConsoleChat {
         Random random = new Random();
         Scanner scanner = new Scanner(System.in);
         String readLine = scanner.nextLine();
-        while (!readLine.equals(OUT)) {
+        while (!OUT.equals(readLine)) {
             log.add(readLine);
             log.add(System.lineSeparator());
-            if (readLine.equals(STOP) || stopIndex == 1) {
+            if (STOP.equals(readLine) || stopIndex == 1) {
                 stopIndex = 1;
-                if (readLine.equals(CONTINUE)) {
+                if (CONTINUE.equals(readLine)) {
                     stopIndex = 0;
                 }
             } else {
