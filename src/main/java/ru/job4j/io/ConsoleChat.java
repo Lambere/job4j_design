@@ -1,10 +1,7 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Random;
-import java.util.Scanner;
+import java.util.*;
 
 public class ConsoleChat {
     private static final String OUT = "закончить";
@@ -27,6 +24,7 @@ public class ConsoleChat {
         String readLine = scanner.nextLine();
         while (!readLine.equals(OUT)) {
             log.add(readLine);
+            log.add(System.lineSeparator());
             if (readLine.equals(STOP) || stopIndex == 1) {
                 stopIndex = 1;
                 if (readLine.equals(CONTINUE)) {
