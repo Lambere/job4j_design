@@ -53,7 +53,7 @@ public class CSVReader {
     }
 
     public static void writeInto(StringBuilder builder, ArgsName argsName) {
-        if (argsName.get("out").equals("stdout")) {
+        if ("stdout".equals(argsName.get("out"))) {
             System.out.println(builder);
         } else {
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(argsName.get("out")))) {
