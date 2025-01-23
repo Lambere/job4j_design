@@ -1,10 +1,6 @@
 package ru.job4j.io;
 
 import java.io.*;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
-import java.sql.SQLOutput;
 import java.util.*;
 import java.util.stream.Stream;
 
@@ -57,10 +53,14 @@ public class CSVReader {
     }
 
     public static void writeInto(StringBuilder builder, ArgsName argsName) {
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(argsName.get("out")))) {
-            writer.write(builder.toString());
-        } catch (Exception e) {
-            throw new RuntimeException(e);
+        if (argsName.get("out").equals("stdout")) {
+            System.out.println(builder);
+        } else {
+            try (BufferedWriter writer = new BufferedWriter(new FileWriter(argsName.get("out")))) {
+                writer.write(builder.toString());
+            } catch (Exception e) {
+                throw new RuntimeException(e);
+            }
         }
 
     }
