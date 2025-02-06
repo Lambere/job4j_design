@@ -25,6 +25,7 @@ public class EchoServer {
                         case "Exit" -> server.close();
                         case "Hello" -> output.write("Hello".getBytes());
                         case "What" -> output.write("What".getBytes());
+                        default -> output.write("Wrong address".getBytes());
                     }
                     output.flush();
                 }
