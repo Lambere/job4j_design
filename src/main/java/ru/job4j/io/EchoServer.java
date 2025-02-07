@@ -1,5 +1,7 @@
 package ru.job4j.io;
 
+import org.w3c.dom.ls.LSOutput;
+
 import java.io.*;
 import java.net.ServerSocket;
 import java.net.Socket;
@@ -16,11 +18,12 @@ public class EchoServer {
                              new InputStreamReader(socket.getInputStream()))) {
                     output.write("HTTP/1.1 200 OK\r\n\r\n".getBytes());
                     String headLine = input.readLine();
+                    System.out.println(headLine);
                     for (String string = input.readLine(); string != null && !string.isEmpty(); string = input.readLine()) {
                         System.out.println(string);
                     }
                     String[] b = headLine.split(" ");
-                    String a = b[1].replace("/?msg=", "");
+                    String a = b[1].replace("GET /?msg=", "");
                     switch (a) {
                         case "Exit" -> server.close();
                         case "Hello" -> output.write("Hello".getBytes());
